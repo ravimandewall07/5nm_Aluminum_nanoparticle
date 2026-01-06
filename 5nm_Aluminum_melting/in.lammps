@@ -1,32 +1,29 @@
-# LAMMPS script for 5nm diameter Al nanoparticle with FCC configuration
+#To run the Lammps input files using a parallel LAMMPS molecular dynamics simulation on a system with LAMMPS software and MPI installed. Place all provided files in your working directory, then execute the simulation using the command "mpirun -np 64 lmp -in in.lammps", which launches LAMMPS on 64 MPI processes and reads the run parameters from in.lammps.
 
-# Define units and atom style
 units metal
 atom_style atomic
 
-# Initialize the simulation
 boundary p p p
 
 read_data 5nm_al_.data
 
 pair_style	meam
-pair_coeff * * /home/ravi/lammps/potentials/library_Al_2nn.meam Al /home/ravi/lammps/potentials/Al.meam Al
+pair_coeff * * library_Al_2nn.meam Al Al.meam Al
 
 
 
 timestep 0.001
 
 
-# Output settings
+
 dump 1 all atom 1000 dump.aluminum.lammpstrj
 log log.txt
 
-# Minimization step
+
 min_style cg
 minimize 1e-4 1e-6 1000 10000
 
-# Temperature runs
-#dt =0.001
+
 
 # Run at 300 K
 velocity all create 300.0 1234321 mom yes rot yes dist gaussian
@@ -99,6 +96,7 @@ run 100000
 unfix nvt7
 
 write_data data.aluminum_900_
+
 
 
 
