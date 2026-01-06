@@ -1,0 +1,1 @@
+To run the Lammps input files using a parallel LAMMPS molecular dynamics simulation on a system with LAMMPS software and MPI installed. Place all provided files in your working directory, then execute the simulation using the command "mpirun -np 64 lmp -in in.lammps", which launches LAMMPS on 64 MPI processes and reads the run parameters from in.lammps.
